@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "voting-analytics-pulumi"
+version = "0.1.0"
+description = ""
+authors = ["moreuo <98001570+moreuo@users.noreply.github.com>"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pulumi = ">=3.0.0,<4.0.0"
+pulumi-kubernetes = ">=4.0.0,<5.0.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

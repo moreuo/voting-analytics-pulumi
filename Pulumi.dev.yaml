@@ -1,0 +1,26 @@
+config:
+  k3d-cluster:Chart:
+    - name: rabbitmq
+      helm-repo: https://charts.bitnami.com/bitnami
+      values:
+        auth:
+          username: admin
+          password: admin@master
+          erlangCookie: 38e8749e7c23c572f0f72375efda00bb15bf60df7d3e938e
+        service:
+          type: LoadBalancer
+    - name: mageai
+      helm-repo: https://mage-ai.github.io/helm-charts
+      values:
+        secrets:
+          REQUIRE_USER_AUTHENTICATION: '1'
+          DEFAULT_OWNER_PASSWORD: admin@master
+        service:
+          type: LoadBalancer
+  k3d-cluster:Ingress:
+    - name: rabbitmq
+      ingress-host: rabbitmq.dev.localhost
+      ingress-port: 15672
+    - name: mageai
+      ingress-host: mageai.dev.localhost
+      ingress-port: 6789

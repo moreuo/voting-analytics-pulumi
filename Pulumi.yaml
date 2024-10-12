@@ -1,0 +1,5 @@
+name: k3d-cluster
+runtime:
+  name: python
+  options:
+    toolchain: poetry
