@@ -17,6 +17,13 @@ config:
           DEFAULT_OWNER_PASSWORD: admin@master
         service:
           type: LoadBalancer
+    - name: trino
+      helm-repo: https://trinodb.github.io/charts
+      values:
+        additionalConfigProperties:
+          - http-server.process-forwarded=true
+        service:
+          type: LoadBalancer
   k3d-cluster:Ingress:
     - name: rabbitmq
       ingress-host: rabbitmq.dev.localhost
@@ -24,3 +31,6 @@ config:
     - name: mageai
       ingress-host: mageai.dev.localhost
       ingress-port: 6789
+    - name: trino
+      ingress-host: trino.dev.localhost
+      ingress-port: 8080
