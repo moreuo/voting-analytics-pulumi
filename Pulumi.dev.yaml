@@ -22,6 +22,27 @@ config:
       values:
         additionalConfigProperties:
           - http-server.process-forwarded=true
+        catalogs:
+          postgresql: |-
+            connector.name=postgresql
+            connection-url=jdbc:postgresql://postgresql.default.svc.cluster.local:5432/voting
+            connection-user=admin
+            connection-password=admin@master
+        service:
+          type: LoadBalancer
+    - name: postgresql
+      helm-repo: https://charts.bitnami.com/bitnami
+      values:
+        auth:
+          username: admin
+          password: admin@master
+          database: voting
+        primary:
+          initdb:
+            scripts:
+              create_voting_schema.sql: |
+                CREATE SCHEMA IF NOT EXISTS voting;
+                GRANT ALL PRIVILEGES ON SCHEMA voting TO admin;
         service:
           type: LoadBalancer
   k3d-cluster:Ingress:
